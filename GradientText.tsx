@@ -1,11 +1,30 @@
-import React from 'react';
-import './GradientText.css';
+import React, { ElementType } from "react";
+import "./GradientText.css";
 
-const GradientText = ({ children }) => {
+type GradientProp = {
+  children: React.ReactNode;
+  classes?: string;
+  duration?: number;
+  as?: ElementType;
+};
+
+const GradientText = ({
+  children,
+  classes,
+  duration = 15,
+  as: Tag = "div",
+}: GradientProp) => {
+  
+  const gradientTextStyle = {
+    WebkitAnimation: `GradientAnimation ${duration}s ease infinite`,
+    MozAnimation: `GradientAnimation ${duration}s ease infinite`,
+    animation: `GradientAnimation ${duration}s ease infinite`,
+  };
+
   return (
-    <div className="gradient-text">
+    <Tag style={gradientTextStyle} className={`gradient-text ${classes}`}>
       {children}
-    </div>
+    </Tag>
   );
 };
 
